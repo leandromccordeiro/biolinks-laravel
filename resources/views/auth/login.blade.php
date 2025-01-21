@@ -17,6 +17,7 @@
                 <span>{{ $message }}</span>
             @enderror
         </div>
+        <br>
 
         <button type="submit">Logar</button>
 

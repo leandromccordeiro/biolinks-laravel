@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MakeLoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -12,20 +14,10 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(){
-
-        request()->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if($user = User::query()
-            ->where('email', '=', request()->email)
-            ->first()){
-                Auth::login($user);
-                return to_route('dashboard');
-            };
-
-        return back()->with(['message' => 'Não encontrado']);
+    public function login(MakeLoginRequest $request) {
+        if($request->tryToLogin()){
+            return to_route('dashboard');
+        }
+        return back()->with(['message' => 'Não deu certo!!']);
     }
 }
