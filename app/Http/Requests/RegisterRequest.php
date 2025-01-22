@@ -48,10 +48,10 @@ class RegisterRequest extends FormRequest
         //     'password' => $request->password, 
         // ]);
 
-        User::query()->create($this->validated());
+        $user = User::query()->create($this->validated());
 
         // 2. loga usuário
-        Auth::login($request->user());
+        Auth::login($user);
 
         return true;
     }

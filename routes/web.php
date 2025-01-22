@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LinkController;
 
 Route::get('/', function () {
@@ -23,12 +24,11 @@ Route::middleware('auth')->group(function () {
     // Route::get('logout', fn () => 'logout')->middleware('auth')->name('logout');
     Route::get('logout', LogoutController::class)->name('logout');
     
-    Route::get('dashboard', fn() => 'dashboard :: '. Auth::user()->id)->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
     // Route::get('dashboard', function() {
     //     return 'dashboard :: '. Auth::user()->id;
     // })->name('dashboard');
 
     Route::get('links/create', [LinkController::class, 'create'])->name('links.create');
     Route::post('links/create', [LinkController::class, 'store']);
-
 });

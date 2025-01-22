@@ -6,11 +6,11 @@
     @endif
 
 
-    <form action="{{ route('registrar') }}" method="post">
+    <form action="{{ route('links.create') }}" method="post">
         @csrf
 
         <div>
-            <input name="name" placeholder="Email" value="{{ old('link') }}">
+            <input name="link" placeholder="Link" value="{{ old('link') }}">
             @error('link')
                 <span>{{ $message }}</span>
             @enderror
